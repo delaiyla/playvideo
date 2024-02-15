@@ -11,7 +11,9 @@ int main() {
 
     std::string stream;
     while (std::getline(inputFile, stream)) {
-        std::string command = "ffplay -i " + stream;
+        std::string command = "ffplay -hide_banner -flags +global_header -i " + stream +
+        " -indexmem 512 -rtbufsize 64K -probesize 512 -analyzeduration 0 " +
+        " -thread_queue_size 2048 -avoid_negative_ts \"make_zero\"";
     // Если нужно посмотреть видео последовательно из плейлиста
     //  system(command.c_str());
  #if defined(_WIN32)
